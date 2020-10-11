@@ -52,46 +52,90 @@ typedef vector<pii>		vpii;
 typedef vector<pl>		vpl;
 typedef vector<vi>		vvi;
 typedef vector<vl>		vvl;
+lli bsearch(vector<lli> v,lli l,lli h,lli x ){
+    lli mid = l + floor((h-l)/2);
+    if(v[mid]==x)
+    return mid;
+    else{
+        if(v[mid]>x){
+            h = mid-1;
+            return (bsearch(v,l,h,x));
+        }if(v[mid]<x){
+            l = mid+1;
+            return (bsearch(v,l,h,x));
+        }
+    }return 0;
+}
 
 int main() {
+     ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
      lli t;
      cin>>t;
      while(t--){
-         vector<lli> s;
+         
          lli n,x,p,k,j=0;
          cin>>n>>x>>p>>k;
-         if(p>k){
-             cout<<"-1"<<"\n";
-             continue;
-         }
+         
+         vl s;
+        lli r;
           fo(i,n){
-              lli r;
+              
               cin>>r;
-              s.push_back(r);
-          }sort(s.begin(),s.end());
-           if(binary_search(s.begin(),s.end(),x)==false){
+              s.pb(r);
+              if(r==x)
+              j++;
+              
+          }sort(s.begin(),s.end());   
+
+           if(j==0){
               cout<<"-1"<<"\n";
               continue;
           }
-          if(s[p-1]==x){
-              cout<<"0"<<"\n";
-              continue;
-          }
+          
          else{
-              auto it = upper_bound(s.begin(),s.end(),x);
-              lli index = distance(s.begin(), it );
-              if(p<index){
-                  cout<<"-1"<<"\n";
-                  continue;
-              }else{
-                  cout<<p-index<<"\n";
-                  continue;
-              }
+             lli low = 0,high = n;
+             lli index = bsearch(s,low,high,x)+1;
+             if(k==index&&p!=index){
+                 cout<<"-1"<<"\n";
+                 continue;
+             }
+             if(p==index){
+                 cout<<"0"<<"\n";
+                 continue;
+             }
+             if(p==k){
+                 cout<<abs(p-index)<<"\n";
+                 continue;
+             }if(index<k&&k<p){
+                 cout<<"-1"<<"\n";
+                 continue;
+             }if(k<p&&index>k&&index<p){
+                 cout<<"-1"<<"\n";
+                 continue;
+             }if(k<p&&p<index){
+                 cout<<abs(p-index)<<"\n";
+                 continue;
+             }
+             if(p<k&&p>index){
+                 cout<<abs(p-index)<<"\n";
+                 continue;
+             }
+             if(p<k&&k>index&&p<index){
+                 cout<<"-1"<<"\n";
+                 continue;
+             }if(p<k&&k<index){
+                 cout<<"-1"<<"\n";
+                 continue;
+             }
+              
               
             
-              }
+              
+     }
+     } 
 
-          }
+          
      
     
     return 0;
