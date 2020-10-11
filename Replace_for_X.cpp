@@ -57,8 +57,8 @@ int main() {
      lli t;
      cin>>t;
      while(t--){
-         vector<long long int> s;
-         lli n,x,p,k,count=0,j=0;
+         vector<lli> s;
+         lli n,x,p,k,j=0;
          cin>>n>>x>>p>>k;
          if(p>k){
              cout<<"-1"<<"\n";
@@ -69,16 +69,17 @@ int main() {
               cin>>r;
               s.push_back(r);
           }sort(s.begin(),s.end());
+           if(binary_search(s.begin(),s.end(),x)==false){
+              cout<<"-1"<<"\n";
+              continue;
+          }
           if(s[p-1]==x){
               cout<<"0"<<"\n";
               continue;
           }
-          if(binary_search(s.begin(),s.end(),x)==false){
-              cout<<"-1"<<"\n";
-              continue;
-          }else{
-              lli index = binary_search(s.begin(),s.end(),x);
-              index++;
+         else{
+              auto it = upper_bound(s.begin(),s.end(),x);
+              lli index = distance(s.begin(), it );
               if(p<index){
                   cout<<"-1"<<"\n";
                   continue;
