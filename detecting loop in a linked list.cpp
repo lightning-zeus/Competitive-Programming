@@ -54,18 +54,7 @@ typedef vector<vi>		vvi;
 typedef vector<vl>		vvl;
 
 int main() {
-   lli t;
-   cin>>t;
-while(t--){
-    lli n;
-    vector<int> v;
-    fo(i,n){
-        int r;
-        cin>>r;
-        v.push_back(r);
-    }
-}
-   }
+
     
     return 0;
 }
