@@ -52,20 +52,42 @@ typedef vector<pii>		vpii;
 typedef vector<pl>		vpl;
 typedef vector<vi>		vvi;
 typedef vector<vl>		vvl;
+#define M 4000000
+vector<long long int> v;
+void sieve(int n){
+    bool prime[M];
+    memset(prime, true, sizeof(prime)); 
+    for(int p=2;p*p<=M;p++){
+        if(prime[p]==true){
+            for(int i=p*p;i<=M;i+=p){
+                 prime[i] = false;
+            }
+        }
+    }for (int p=2; p<=n; p++) 
+       if (prime[p])
+         v.push_back(p);
+}
 
 int main() {
-   lli t;
+    
+   lli t,n=4000000;
    cin>>t;
+   sieve(n);
 while(t--){
-    lli n;
-    vector<int> v;
+    cin>>n;
+    vector<int> s;
+    int arr[n];
     fo(i,n){
         int r;
         cin>>r;
-        v.push_back(r);
+        s.push_back(r);
     }
+    fo(i,n){
+        cout<<v[s[i]-1]<<" ";
+    }
+    cout<<"\n";
 }
-   }
+   
     
     return 0;
 }
