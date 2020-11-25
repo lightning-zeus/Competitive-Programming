@@ -1,0 +1,31 @@
+int i = 1;
+    while (i) {
+        int choice;
+        printf("1 : insert; 2: lookup; 3: printList; 0: exit\n");
+        printf("Enter choice : ");
+        scanf("%d", &i);
+        
+        switch (i) {
+            case 1:
+                printf("Enter index and data : ");
+                scanf("%d %d", &pos, &val);
+                insert(&head, val,pos,n);
+                printlist(head);
+                break;
+            case 2:
+                printf("Enter index to look up : ");
+                scanf("%d",&pos);
+                lookup(pos,head);
+                break;
+            case 3: 
+                printlist(head);
+                break;
+            default:
+                printf("Terminating....\n");                
+        }
+    }
+   
+    return 0;
+    
+
+}
