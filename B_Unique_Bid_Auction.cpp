@@ -1,4 +1,4 @@
-##include <iostream>
+#include <iostream>
 #include <string>
 #include <vector>
 #include <algorithm>
@@ -30,7 +30,7 @@ using namespace std;
 #define pl(x)	printf("%lld\n",x)
 #define ps(s)	printf("%s\n",s)
 #define deb(x) cout<<x<<endl;
-#define fo(i, n) for(int i=0; i<n; i++)
+#define fo(i, n) for(lli i=0; i<n; i++)
 #define fk(i, k, n) for(int i=k; i<=n; i++)
 #define fn(i, n) for(i=n-1;i>=0;i--)
 #define pb push_back
@@ -52,26 +52,53 @@ typedef vector<pii>		vpii;
 typedef vector<pl>		vpl;
 typedef vector<vi>		vvi;
 typedef vector<vl>		vvl;
-using namespace std;
+
+
+
+
 int main() {
 ios_base::sync_with_stdio(false);
 cin.tie(NULL);
-int T;
-    cin>>T;
-    while(T--){
-        lli n,sum=0,s=0;
-        cin>>n;
-        vector<lli> v;
+lli t;
+cin>>t;
+while(t>0){
+    t--;
+    vector<lli> v,s;
+    lli n;
+   
+    cin>>n;
+     
+    fo(i,n){
+        int r;
+        cin>>r;
+        v.pb(r),s.pb(r);
+    }sort(v.begin(),v.end());
+    lli min=0;
+    for(int i=1;i<n;i++){
+        if(v[1]!=v[0]){
+            min = v[0];
+            break;
+        }
+        if(v[i]!=v[i-1]&&v[i]!=v[i+1]){
+            min = v[i];
+            break;
+        }
+          
+    }if(n==1)
+     cout<<1<<"\n";
+     else{
+    if(min!=0){
         fo(i,n){
-          lli r;
-          cin>>r;
-          v.pb(r);
-          sum += r;
-          if(r>s)
-            s = r;
-        }lli m = ceil((double)sum/(double)n-1);
-          lli k = max(m,s);
-          cout<<k*(n-1) - sum<<"\n";
-    }
+            if(s[i]==min)
+                cout<<i+1<<"\n";
+                
+            
+        }
+    }else{
+        cout<<"-1"<<"\n";
+    }}
+    
+
+}
 return 0;
 }

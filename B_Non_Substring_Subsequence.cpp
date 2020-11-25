@@ -67,16 +67,18 @@ while(t--){
         vector<char> ch,test;
         lli l,r;
         cin>>l>>r;
-        for(int i=0;i<=r-l;i++){
-            ch.pb(str[l+i-1]);  
-        }int count=0,j=0;
-        fo(i,r-l+1){
-           
+        l--,r--; 
+        bool counter = true;
+        for(int i=0;i<l&&counter;i++){
+            if(str[i]==str[l]) counter = false;
+        } for(int i=r+1;i<n&&counter;i++){
+            if(str[i]==str[r]) counter = false;
         }
-        }if(test.size()==(r-l)+1)
-            cout<<"YES"<<"\n";
+        if(counter==true)
+        cout<<"NO"<<"\n";
         else
-            cout<<"NO"<<"\n";
+        cout<<"YES"<<"\n";
+        
 
     }
 }

@@ -28,10 +28,14 @@ void getlength(struct node *temp){
 }
 
 void  printlist(struct node *temp){
+    if(head==NULL){
+        printf("The linked list is already empty.\n");
+        return;
+    }
     while(temp!=0){
         printf("%d ",temp->data);
         temp = temp->next;
-    }
+    }printf("\n");
 
 }
 void lookup(int pos,struct node *temp){
@@ -46,20 +50,69 @@ void lookup(int pos,struct node *temp){
     }printf("The element at the specified position is %d\n", temp->data);
       }
 }
-void insert(struct node **head,int data,int pos){
+void insert(struct node **head,int data,int pos,int length){
+    if(*head==NULL){
+        printf("The linked list is already empty.\n");
+        return;
+    }
+     struct node *s;
+         s = (struct node*)malloc(sizeof(struct node));
       if(pos==1){
-          struct node *s;
-          s = (struct node*)malloc(sizeof(struct node));
+         
           s->data = data;
           s->next = *head;
           *head = s;
+          return;
+      }if(pos==length){
+          struct node *p = *head;
+          while(p->next!=0){
+              p = p->next;
+          }  s->data = data;
+          p->next = s;
+          s->next = NULL;
+          return;
+      }else{
+          struct node *p = *head;
+          for(int i=0;i<pos-1;i++){
+             p = p->next;
+          }s->data = data;
+          s->next = p->next;
+          p->next = s;
+          return;
       }
+}
+void remove(struct node **head,int pos,int length){
+    if(*head==NULL){
+        printf("The linked list is already empty.\n");
+        return;
+    }
+    if(pos==1){
+        struct node *p = *head;
+        *head = p->next;
+        free(p);
+    }
+     if(pos==length){
+         struct node *p = *head;
+         while((p->next)->next!=NULL){
+             p = p->next;
+         }struct node *f = p->next;
+         p->next = 0;
+         free(f);
+     }else{
+         struct node *prev=0,*curr= *head;
+         for(int i=0;i<pos-1;i++){
+             prev = curr;
+             curr = curr->next;
+         }prev->next = curr->next;
+         free(curr);
+     }
 }
 
 
 
 int main(){
-    int n; // the total length of linked list
+    int pos,val,choice,n; // the total length of linked list
+    printf("Input the lenght of the linked list: ");
     scanf("%d",&n);
     struct node *temp, *s;
     if(n==0)
@@ -77,14 +130,31 @@ int main(){
         temp = s;
     }temp->next = 0; //ending the linked list;
     temp = head;
-   }int data = 21;
-          s = (struct node*)malloc(sizeof(struct node));
-          s->data = data;
-          s->next = head;
-          head = s;
-   printlist(temp);
+   }printf("Input your choice:\n");
+   printf("1.WHAT IS THE LENGTH OF THE LINKED LIST?\n");
+   printf("2.IS THE LINKED LIST EMPTY?\n");
+   printf("3.Insert an element in the linked list\n");
+   printf("4.Delete an element from the linked list.\n");
+   printf("5.Print the linked list.\n");
+   scanf("%d\n",&choice);
+   switch(choice){
+       case 1: getlength(head);
+               break;
+       case 2: isempty(head);
+                break;
+       case 3: printf("Input the value and position at which you want to add the new element\n");
+               scanf("%d %d",&pos,&val);
+               insert(&head,val,pos,n);
+               break;
+       case 4: printf("Input the position at which you want to delete the element from the linked list\n");
+               scanf("%d",pos);
+               remove(&head,pos,n);
+               break;
+        case 5: printlist(head);
+                break;
+   }
    
-    
+    return 0;
     
 
 }

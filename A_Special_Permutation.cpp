@@ -1,4 +1,4 @@
-##include <iostream>
+#include <iostream>
 #include <string>
 #include <vector>
 #include <algorithm>
@@ -52,26 +52,35 @@ typedef vector<pii>		vpii;
 typedef vector<pl>		vpl;
 typedef vector<vi>		vvi;
 typedef vector<vl>		vvl;
-using namespace std;
+
 int main() {
 ios_base::sync_with_stdio(false);
 cin.tie(NULL);
-int T;
-    cin>>T;
-    while(T--){
-        lli n,sum=0,s=0;
-        cin>>n;
-        vector<lli> v;
-        fo(i,n){
-          lli r;
-          cin>>r;
-          v.pb(r);
-          sum += r;
-          if(r>s)
-            s = r;
-        }lli m = ceil((double)sum/(double)n-1);
-          lli k = max(m,s);
-          cout<<k*(n-1) - sum<<"\n";
+lli t;
+cin>>t;
+while(t--){
+    lli n,count=0;
+    vector<lli> v;
+    cin>>n;
+    if(n==1){
+        cout<<1<<"\n";
+        continue;
     }
+    if(n%2==0){
+       for(int i=n;i>0;i--){
+           cout<<i<<" ";
+       }cout<<"\n";
+    }else{
+        for(int i=n;i>0;i--){
+            count++;
+            if(i==count){
+              cout<<i-1<<" ";
+              cout<<count<<" ";
+              i--;
+            }else
+             cout<<i<<" ";
+        }cout<<"\n";
+    }
+}
 return 0;
 }
