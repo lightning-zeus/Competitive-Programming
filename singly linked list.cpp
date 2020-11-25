@@ -24,7 +24,7 @@ void getlength(struct node *temp){
    while(temp!=0){
        temp = temp->next;
        length++;
-   }printf("The length of the linked list is %d",length);
+   }printf("The length of the linked list is %d\n",length);
 }
 
 void  printlist(struct node *temp){
@@ -63,7 +63,7 @@ void insert(struct node **head,int data,int pos,int length){
           s->next = *head;
           *head = s;
           return;
-      }if(pos==length){
+      }if(pos>length){
           struct node *p = *head;
           while(p->next!=0){
               p = p->next;
@@ -73,7 +73,7 @@ void insert(struct node **head,int data,int pos,int length){
           return;
       }else{
           struct node *p = *head;
-          for(int i=0;i<pos-1;i++){
+          for(int i=0;i<pos-2;i++){
              p = p->next;
           }s->data = data;
           s->next = p->next;
@@ -90,6 +90,8 @@ void remove(struct node **head,int pos,int length){
         struct node *p = *head;
         *head = p->next;
         free(p);
+        return;
+        
     }
      if(pos==length){
          struct node *p = *head;
@@ -111,11 +113,11 @@ void remove(struct node **head,int pos,int length){
 
 
 int main(){
-    int pos,val,choice,n; // the total length of linked list
+    int pos,val,n; // the total length of linked list
     printf("Input the lenght of the linked list: ");
     scanf("%d",&n);
     struct node *temp, *s;
-    if(n==0)
+     if(n==0)
      head=0;
      //using the iterative approach to implement a sample linked list
    else
@@ -130,29 +132,45 @@ int main(){
         temp = s;
     }temp->next = 0; //ending the linked list;
     temp = head;
-   }printf("Input your choice:\n");
-   printf("1.WHAT IS THE LENGTH OF THE LINKED LIST?\n");
-   printf("2.IS THE LINKED LIST EMPTY?\n");
-   printf("3.Insert an element in the linked list\n");
-   printf("4.Delete an element from the linked list.\n");
-   printf("5.Print the linked list.\n");
-   scanf("%d\n",&choice);
-   switch(choice){
-       case 1: getlength(head);
-               break;
-       case 2: isempty(head);
-                break;
-       case 3: printf("Input the value and position at which you want to add the new element\n");
-               scanf("%d %d",&pos,&val);
-               insert(&head,val,pos,n);
-               break;
-       case 4: printf("Input the position at which you want to delete the element from the linked list\n");
-               scanf("%d",pos);
-               remove(&head,pos,n);
-               break;
-        case 5: printlist(head);
-                break;
    }
+   int i = 1;
+    while (i) {
+        int choice;
+        printf("1 : insert; 2 : delete; 3 : getLength; 4 : isEmpty; 5: lookup; 6: printList; 0: exit\n");
+        printf("Enter choice : ");
+        scanf("%d", &i);
+        
+        switch (i) {
+            case 1:
+                printf("Enter index and data : ");
+                scanf("%d %d", &pos, &val);
+                insert(&head, val,pos,n);
+                printlist(head);
+                break;
+            case 2:
+                printf("Enter index to delete from : ");
+                scanf("%d", &pos);
+                remove(&head,pos,n);
+                printlist(head);
+                break;
+            case 3:
+                getlength(head);
+                break;
+            case 4:
+                isempty(head);
+                break;
+            case 5:
+                printf("Enter index to look up : ");
+                scanf("%d",&pos);
+                lookup(pos,head);
+                break;
+            case 6: 
+                printlist(head);
+                break;
+            default:
+                printf("Terminating....\n");                
+        }
+    }
    
     return 0;
     
